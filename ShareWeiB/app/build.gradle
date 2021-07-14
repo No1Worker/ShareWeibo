@@ -10,8 +10,16 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
+        ndk {
+            abiFilters 'armeabi' , 'armeabi-v7a','arm64-v8a'
+        }
     }
     buildTypes {
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -19,7 +27,16 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+
+//    implementation 'com.sina.weibo.sdk:core:4.4.3:openDefaultRelease@aar'
+    compile(name: 'openDefault-4.4.3', ext: 'aar')
 }
